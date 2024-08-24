@@ -1,0 +1,174 @@
+/* App Wrapper */
+.app-wrapper {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* App Tabs */
+.app-tabs {
+  flex-grow: 1;
+  width: 100%;
+}
+
+/* Card Wrapper */
+.cards-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  max-width: 1010px;
+  margin: 0 auto;
+}
+
+@media (width <= 1010px) {
+  .cards-wrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Search Input */
+.movie-search-input {
+  max-width: 600px;
+}
+
+/* Movie Cards */
+.movie-card {
+  padding: 0;
+}
+
+.movie-card .ant-card-body {
+  padding: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.movie-cover {
+  display: flex;
+  flex-direction: column;
+  max-width: 40%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px 0 0 6px;
+  justify-content: center;
+  align-items: center;
+  font-size: 86px;
+  line-height: 60px;
+}
+
+.movie-cover > span {
+  font-size: 15px;
+  color: gainsboro;
+}
+/* Card Body */
+.movie-card-body {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  padding: 20px;
+}
+
+/* Card Title */
+.movie-card-title {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 7px;
+  margin-right: 34px;
+}
+
+/* Card Date */
+.movie-card-date {
+  font-size: 12px;
+  color: #827e7e;
+  margin-top: 0;
+  margin-bottom: 7px;
+}
+
+/* Card Description */
+.movie-card-description {
+  font-size: 12px;
+  color: #000000;
+  line-height: 22px;
+  margin-top: 0;
+  margin-bottom: 7px;
+}
+
+/* Card Genres List */
+.movie-card-genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  margin-bottom: 7px;
+  padding: 0;
+}
+
+.movie-card-genre {
+  font-size: 12px;
+  color: #827e7e;
+  text-transform: capitalize;
+  background-color: #fafafa;
+  border: #d9d9d9 1px solid;
+  border-radius: 2px;
+  line-height: 14.5px;
+  padding: 2px 5px;
+}
+
+/* Movie Card Rating */
+
+.movie-card-rating-id {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  border: 2px solid;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+
+.movie-card-rating li {
+  margin-right: 2px !important ;
+}
+
+.movie-card-rating {
+  margin-top: auto;
+  margin-bottom: 5px;
+}
+
+/* Emoji Spinner */
+.emoji-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px; /* Adjust as needed */
+}
+
+.emoji {
+  font-size: 48px; /* Adjust as needed */
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
