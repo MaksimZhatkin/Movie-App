@@ -7,6 +7,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 // const ProgressPlugin = webpack.ProgressPlugin;
 
 const __filename = fileURLToPath(import.meta.url);
@@ -98,7 +99,34 @@ export default (env) => {
     // Optimization
     optimization: {
       minimize: true,
-      minimizer: [new CssMinimizerPlugin({})],
+      minimizer: [new CssMinimizerPlugin({}), new TerserPlugin()],
+
+      splitChunks: {
+        chunks: 'all',
+        maxInitialRequests: 5, // Max number of parallel requests for on-demand loading
+        maxAsyncRequests: 7, // Max number of parallel requests at an entry point
+        cacheGroups: {
+          default: false, // Disable the default cache groups
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            priority: -10,
+          },
+          common: {
+            name: 'common',
+            minChunks: 2, // Minimum number of chunks that must share a module before splitting
+            chunks: 'all',
+            priority: -20,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    },
+
+    // Performance
+    performance: {
+      hints: false,
     },
 
     // Server
