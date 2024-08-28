@@ -17,6 +17,7 @@ export default async function postMovieRating(movieId: any, rating: any, guestSe
       },
     });
   } catch (err: any) {
+    // eslint-disable-next-line no-console
     console.log('Erorr rate movie', err);
   }
   return rating;

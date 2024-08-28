@@ -1,8 +1,12 @@
 import { Rate } from 'antd';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 
-function Rating({ rating, onRatingChange }: any) {
-  const [movieRating, setMovieRating] = useState(rating);
+import { GuestRatingsContext } from '../../contexts/GlobalContext';
+
+function Rating({ movieId, rating, onRatingChange }: any) {
+  const { guestRatings, addRating }: any = useContext(GuestRatingsContext);
+
+  const movieRating = guestRatings[movieId] || rating;
 
   return (
     <Rate
@@ -11,7 +15,8 @@ function Rating({ rating, onRatingChange }: any) {
       count={10}
       value={movieRating}
       onChange={(value) => {
-        setMovieRating(onRatingChange(value));
+        addRating(value);
+        onRatingChange(value);
       }}
     />
   );

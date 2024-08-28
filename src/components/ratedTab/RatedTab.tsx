@@ -32,7 +32,7 @@ export default function RatedTab() {
     if (sessionId && !error) {
       fetchRatedMovies();
     }
-  }, [sessionId, currentPage]);
+  }, [sessionId]);
 
   return (
     <Flex vertical align="center">

@@ -27,7 +27,7 @@ export default function SearchTab() {
       1000,
       { maxWait: 3000 }
     ),
-    []
+    [error]
   );
 
   useEffect(() => {

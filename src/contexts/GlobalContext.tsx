@@ -1,8 +1,9 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useCallback, useMemo } from 'react';
 
 import getGenres from '../api/getGenres';
 import getSessionId from '../api/getSessionId';
 
+export const GuestRatingsContext = createContext(null);
 export const GenreContext = createContext(null);
 export const SessionContext = createContext(null);
 export const ErrorContext = createContext(null);
@@ -11,6 +12,14 @@ export default function GlobalProvider({ children }: any) {
   const [genres, setGenres] = useState<any>([]);
   const [error, setError] = useState<any>(null);
   const [sessionId, setSessionId] = useState<any>(null);
+  const [guestRatings, setGuestRatings] = useState<any>({});
+
+  const addRating = useCallback((movieId: number, rating: number) => {
+    setGuestRatings((prevRatings: any) => ({
+      ...prevRatings,
+      [movieId]: rating,
+    }));
+  }, []);
 
   useEffect(() => {
     const fetchGenres = async () => {
@@ -35,12 +44,15 @@ export default function GlobalProvider({ children }: any) {
 
     fetchSessionId();
   }, []);
+  const RatingsProviderData = useMemo<any>(() => ({ guestRatings, addRating }), [guestRatings]);
 
   return (
-    <ErrorContext.Provider value={error}>
-      <SessionContext.Provider value={sessionId}>
-        <GenreContext.Provider value={genres}>{children}</GenreContext.Provider>
-      </SessionContext.Provider>
-    </ErrorContext.Provider>
+    <GuestRatingsContext.Provider value={RatingsProviderData}>
+      <ErrorContext.Provider value={error}>
+        <SessionContext.Provider value={sessionId}>
+          <GenreContext.Provider value={genres}>{children}</GenreContext.Provider>
+        </SessionContext.Provider>
+      </ErrorContext.Provider>
+    </GuestRatingsContext.Provider>
   );
 }
